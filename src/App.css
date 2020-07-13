@@ -22,12 +22,26 @@
   flex-grow: 1;
 }
 
+.product-picture-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-picture-holder img {
+  max-width: 100%;
+}
+
 .ant-card-cover {
   padding: 25px;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .mb-15 {
-  margin-bottom: 15px;
+  margin-bottom: 15px !important;
 }
 
 .mb-30 {

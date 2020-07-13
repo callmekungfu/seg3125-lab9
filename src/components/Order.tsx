@@ -15,7 +15,9 @@ import {
   Skeleton,
   Avatar,
 } from 'antd';
-import { VisionaryCatelog } from '../data/catelog';
+import { AppState } from '../store/configureStore';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFromCart } from '../actions/ShoppingCart';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -36,6 +38,8 @@ const validateMessages = {
 
 const OrderComponent = () => {
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const cart = useSelector((state: AppState) => state.shoppingCart);
   return (
     <div>
       <Title level={2}>Rental Request Form</Title>
@@ -51,13 +55,22 @@ const OrderComponent = () => {
             <List
               className="demo-loadmore-list"
               itemLayout="horizontal"
-              dataSource={VisionaryCatelog}
+              dataSource={cart}
               renderItem={(item) => (
-                <List.Item actions={[<Button type="link">Remove</Button>]}>
+                <List.Item
+                  actions={[
+                    <Button
+                      type="link"
+                      onClick={() => dispatch(removeFromCart(item.id))}
+                    >
+                      Remove
+                    </Button>,
+                  ]}
+                >
                   <Skeleton avatar title={false} loading={item.loading} active>
                     <List.Item.Meta
                       avatar={<Avatar src={item.preview_image_url} />}
-                      title={<a href={`/item/${item.slug}`}>{item.name}</a>}
+                      title={<a href={`/product/${item.slug}`}>{item.name}</a>}
                       description={formatter.format(item.price_per_day)}
                     />
                   </Skeleton>

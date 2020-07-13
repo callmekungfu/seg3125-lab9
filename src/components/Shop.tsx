@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { Menu, Card, Col, Row, Input } from 'antd';
+import { Menu, Card, Col, Row, Input, Tag } from 'antd';
 import { VisionaryCatelog } from '../data/catelog';
+import { useSelector } from 'react-redux';
+import { AppState } from '../store/configureStore';
+import { Link } from 'react-router-dom';
+import { CheckCircleOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 const { Meta } = Card;
@@ -8,6 +12,7 @@ const { Search } = Input;
 
 const ShopComponent = () => {
   const [current, setCurrent] = useState('all');
+  const cart = useSelector((state: AppState) => state.shoppingCart);
   return (
     <div className="store-wrapper">
       <Menu
@@ -53,24 +58,34 @@ const ShopComponent = () => {
       />
       <Row gutter={[16, 16]}>
         {VisionaryCatelog.map((item) => (
-          <Col xs={24} sm={12} md={8} lg={8} xl={4} key={item.name}>
-            <Card
-              hoverable
-              cover={
-                item.preview_image_url && (
-                  <img alt={item.name} src={item.preview_image_url} />
-                )
-              }
-            >
-              <Meta
-                title={item.name}
-                description={`${
-                  item.description.short
-                } Available in ${item.available_locations.join(', ')}`}
-                className="mb-15"
-              />
-              <Meta title={`$${item.price_per_day.toFixed(2)}/day`} />
-            </Card>
+          <Col xs={24} sm={12} md={8} lg={8} xl={6} xxl={4} key={item.name}>
+            <Link to={`/product/${item.slug}`}>
+              <Card
+                hoverable
+                cover={
+                  item.preview_image_url && (
+                    <img alt={item.name} src={item.preview_image_url} />
+                  )
+                }
+              >
+                <Meta
+                  title={item.name}
+                  description={`${
+                    item.description.short
+                  } Available in ${item.available_locations.join(', ')}`}
+                  className="mb-15"
+                />
+                <Meta
+                  title={`$${item.price_per_day.toFixed(2)}/day`}
+                  className="mb-15"
+                />
+                {cart.some((i) => i.id === item.id) && (
+                  <Tag icon={<CheckCircleOutlined />} color="success">
+                    In Cart
+                  </Tag>
+                )}
+              </Card>
+            </Link>
           </Col>
         ))}
       </Row>
