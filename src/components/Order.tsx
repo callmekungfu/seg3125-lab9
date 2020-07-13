@@ -14,6 +14,7 @@ import {
   List,
   Skeleton,
   Avatar,
+  Tooltip,
 } from 'antd';
 import { AppState } from '../store/configureStore';
 import { useSelector, useDispatch } from 'react-redux';
@@ -173,9 +174,17 @@ const OrderComponent = () => {
           </Col>
         </Row>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
+          {!cart || cart.length === 0 ? (
+            <Tooltip title="You cannot submit a request without any items.">
+              <Button type="primary" htmlType="submit" block disabled>
+                Submit
+              </Button>
+            </Tooltip>
+          ) : (
+            <Button type="primary" htmlType="submit" block>
+              Submit
+            </Button>
+          )}
         </Form.Item>
       </Form>
     </div>
