@@ -62,7 +62,7 @@ function App() {
           <div className="mb-15">{t('signature')}</div>
           <Select
             style={{ width: '120px' }}
-            defaultValue={i18n.language}
+            defaultValue={i18n.language.substr(0, 2)}
             onChange={handleChange}
           >
             <Option value="en">English</Option>
