@@ -52,7 +52,7 @@ i18n
           submit: 'Submit',
           rental_store: 'Rental Store',
           your_order: 'Your Order',
-          signature: 'Crafted by Yong Lin Wang',
+          signature: 'Crafted by Yong Lin Wang.',
           contact_us_prompt: 'Got a question? Contact us now!',
         },
       },
