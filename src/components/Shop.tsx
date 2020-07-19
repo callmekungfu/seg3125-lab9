@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import ProductFilterComponent from './ProductCategory';
 import { RentalItem } from '../types/Rental';
+import { useTranslation } from 'react-i18next';
 
 const { Meta } = Card;
 const { Search } = Input;
@@ -24,6 +25,7 @@ const applyFilter = (category: string, filter: string, item: RentalItem) => {
 const ShopComponent = () => {
   const [current, setCurrent] = useState('all');
   const [search, setSearch] = useState('');
+  const { t } = useTranslation();
   const cart = useSelector((state: AppState) => state.shoppingCart);
   const catelogToShow = VisionaryCatelog.filter((item) =>
     applyFilter(current, search, item),
@@ -36,8 +38,8 @@ const ShopComponent = () => {
       />
       <Search
         className="mb-30"
-        placeholder="Search through our large catelog here"
-        enterButton="Search"
+        placeholder={t('search_placeholder')}
+        enterButton={t('search')}
         size="large"
         onSearch={(value) => setSearch(value)}
       />
@@ -55,13 +57,12 @@ const ShopComponent = () => {
               >
                 <Meta
                   title={item.name}
-                  description={`${
-                    item.description.short
-                  } Available in ${item.available_locations.join(', ')}`}
+                  description={`${item.description.short} ${t('available_in')}
+                    ${item.available_locations.join(', ')}`}
                   className="mb-15"
                 />
                 <Meta
-                  title={`$${item.price_per_day.toFixed(2)}/day`}
+                  title={`$${item.price_per_day.toFixed(2)}/${t('day')}`}
                   className="mb-15"
                 />
                 {cart.some((i) => i.id === item.id) && (
@@ -75,7 +76,7 @@ const ShopComponent = () => {
         ))}
         {catelogToShow.length === 0 && (
           <Col span={24}>
-            <Empty description="No Products Available" />
+            <Empty description={t('no_product_available')} />
           </Col>
         )}
       </Row>

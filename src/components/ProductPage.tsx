@@ -6,6 +6,7 @@ import { Row, Col, Typography, Button, message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../store/configureStore';
 import { addToCart } from '../actions/ShoppingCart';
+import { useTranslation } from 'react-i18next';
 
 const { Text, Title, Paragraph } = Typography;
 
@@ -16,6 +17,7 @@ const formatter = new Intl.NumberFormat('en', {
 
 const ProductPageComponent = () => {
   const { slug } = useParams();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const cart = useSelector((state: AppState) => state.shoppingCart);
@@ -24,7 +26,7 @@ const ProductPageComponent = () => {
     setLoading(true);
     dispatch(addToCart(item));
     setLoading(false);
-    message.success('Item Added to Cart');
+    message.success(t('item_added_to_cart'));
   };
 
   const rentalItem: RentalItem | undefined = getProductInformationFromSlug(
@@ -44,7 +46,7 @@ const ProductPageComponent = () => {
                 <Title level={4} className="mb-15">
                   {formatter.format(rentalItem.price_per_day)}
                   <Text type="secondary" style={{ marginLeft: '15px' }}>
-                    Per Day
+                    {t('per_day')}
                   </Text>
                 </Title>
               </div>
@@ -57,12 +59,13 @@ const ProductPageComponent = () => {
                   disabled={inCart}
                   onClick={() => addToRentalRequest(rentalItem)}
                 >
-                  {inCart ? 'Item is in cart.' : 'Add to Rental Request'}
+                  {inCart ? t('item_is_in_cart') : t('add_to_rental_request')}
                 </Button>
               </div>
               <div>
                 <Paragraph className="italic mb-15">
-                  Available In: {rentalItem.available_locations.join(', ')}
+                  {t('available_in')}:{' '}
+                  {rentalItem.available_locations.join(', ')}
                 </Paragraph>
                 <Paragraph>{rentalItem.description.full}</Paragraph>
               </div>

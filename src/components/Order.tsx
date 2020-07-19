@@ -20,6 +20,7 @@ import {
 import { AppState } from '../store/configureStore';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, clearCart } from '../actions/ShoppingCart';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -51,6 +52,7 @@ const OrderComponent = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const cart = useSelector((state: AppState) => state.shoppingCart);
+  const { t } = useTranslation();
   const onFinish = () => {
     message.success('Request sent!');
     form.resetFields();
@@ -58,16 +60,11 @@ const OrderComponent = () => {
   };
   return (
     <div>
-      <Title level={2}>Rental Request Form</Title>
-      <p>
-        Your Request will be recieved by our Rental department staff who will
-        contact you by phone to confirm your rental. Our Rental team will be
-        able to answer questions regarding the equipment you are renting as well
-        as recommend compatible equipment choices.
-      </p>
+      <Title level={2}>{t('rental_request_form')}</Title>
+      <p>{t('rental_prompt')}</p>
       <Row gutter={[30, 30]}>
         <Col span={24}>
-          <Card title="Shopping Cart">
+          <Card title={t('shopping_cart')}>
             <List
               className="demo-loadmore-list"
               itemLayout="horizontal"
@@ -105,29 +102,25 @@ const OrderComponent = () => {
         <Row gutter={16}>
           <Col {...inputGridSetup}>
             <Form.Item
-              label="First Name"
+              label={t('first_name')}
               name="first_name"
-              rules={[
-                { required: true, message: 'Please provide your first name' },
-              ]}
+              rules={[{ required: true, message: t('first_name_error') }]}
             >
               <Input placeholder="John" />
             </Form.Item>
           </Col>
           <Col {...inputGridSetup}>
             <Form.Item
-              label="Last Name"
+              label={t('last_name')}
               name="last_name"
-              rules={[
-                { required: true, message: 'Please provide your last name' },
-              ]}
+              rules={[{ required: true, message: t('last_name_error') }]}
             >
               <Input placeholder="Smith" />
             </Form.Item>
           </Col>
           <Col {...inputGridSetup}>
             <Form.Item
-              label="Email Address"
+              label={t('email_address')}
               name="email"
               rules={[
                 { required: true, message: 'Please provide your email' },
@@ -139,7 +132,7 @@ const OrderComponent = () => {
           </Col>
           <Col {...inputGridSetup}>
             <Form.Item
-              label="Phone number"
+              label={t('phone_number')}
               name="phone"
               rules={[
                 {
@@ -153,7 +146,7 @@ const OrderComponent = () => {
           </Col>
           <Col {...inputGridSetup}>
             <Form.Item
-              label="Location"
+              label={t('location')}
               name="location"
               rules={[
                 {
@@ -173,7 +166,7 @@ const OrderComponent = () => {
           <Col {...inputGridSetup}>
             <Form.Item
               name="date"
-              label="Rental Date"
+              label={t('rental_date')}
               rules={[
                 {
                   required: true,
@@ -185,9 +178,9 @@ const OrderComponent = () => {
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Form.Item label="Special request" name="special_request">
+            <Form.Item label={t('special_request')} name="special_request">
               <TextArea
-                placeholder="Anything you would like to include on your request (pick up time, additional accessories etc.)"
+                placeholder={t('special_request_placeholder')}
                 autoSize={{ minRows: 2 }}
               />
             </Form.Item>
@@ -197,12 +190,12 @@ const OrderComponent = () => {
           {!cart || cart.length === 0 ? (
             <Tooltip title="You cannot submit a request without any items.">
               <Button type="primary" htmlType="submit" block disabled>
-                Submit
+                {t('submit')}
               </Button>
             </Tooltip>
           ) : (
             <Button type="primary" htmlType="submit" block>
-              Submit
+              {t('submit')}
             </Button>
           )}
         </Form.Item>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { Layout, Menu, Button, Tooltip } from 'antd';
+import { Layout, Menu, Button, Tooltip, Select } from 'antd';
 import { QuestionOutlined } from '@ant-design/icons';
 import { Provider } from 'react-redux';
 import './App.css';
@@ -9,11 +9,19 @@ import OrderComponent from './components/Order';
 import ChatComponent from './components/Chat';
 import { store } from './store/configureStore';
 import ProductPageComponent from './components/ProductPage';
+import { useTranslation } from 'react-i18next';
 
 const { Header, Content, Footer } = Layout;
+const { Option } = Select;
 
 function App() {
   const [selectedMenu] = useState(window.location.pathname);
+  const { t, i18n } = useTranslation();
+
+  const handleChange = (value: string) => {
+    console.log(`selected ${value}`);
+    i18n.changeLanguage(value);
+  };
   return (
     <Provider store={store}>
       <Router>
@@ -25,10 +33,10 @@ function App() {
             defaultSelectedKeys={[selectedMenu]}
           >
             <Menu.Item key="/">
-              <Link to="/">Rental Store</Link>
+              <Link to="/">{t('rental_store')}</Link>
             </Menu.Item>
             <Menu.Item key="/order">
-              <Link to="/order">Your Order</Link>
+              <Link to="/order">{t('your_order')}</Link>
             </Menu.Item>
           </Menu>
         </Header>
@@ -51,7 +59,16 @@ function App() {
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
-          Crafted by Yong Lin Wang
+          <div className="mb-15">{t('signature')}</div>
+          <Select
+            style={{ width: '120px' }}
+            defaultValue="en"
+            onChange={handleChange}
+          >
+            <Option value="en">English</Option>
+            <Option value="fr">Français</Option>
+            <Option value="cn">中文</Option>
+          </Select>
         </Footer>
         <div className="contact-us-container">
           <Tooltip placement="left" title="Got a question? Contact us now!">
