@@ -1,5 +1,6 @@
 import React from 'react';
 import { Comment, Avatar, Typography, Input, Button } from 'antd';
+import { ChatData } from '../data/chat';
 
 const { TextArea } = Input;
 
@@ -8,31 +9,13 @@ const ChatComponent = () => {
     <div className="chat-container">
       <Typography.Title level={2}>Live Support</Typography.Title>
       <div className="chat-comments">
-        <Comment
-          author={'Jacob Owens (Rental Staff)'}
-          avatar={
-            <Avatar
-              src="https://source.unsplash.com/DQPP9rVLYGQ/200x200"
-              alt="Jacob"
-            />
-          }
-          content={<p>Hello Emma, how can I be of assistance today?</p>}
-        ></Comment>
-        <Comment
-          author={'Emma Liang (You)'}
-          avatar={
-            <Avatar
-              src="https://source.unsplash.com/AGy0SxTzqr8/200x200"
-              alt="Emma"
-            />
-          }
-          content={
-            <p>
-              Hi Jacob! Just wondering if the Canon 5D mark iii is available
-              this weekend?
-            </p>
-          }
-        ></Comment>
+        {ChatData.map((chat) => (
+          <Comment
+            author={`${chat.origin_user.name} (${chat.origin_user.role_title})`}
+            avatar={<Avatar src={chat.origin_user.picture_url} alt="" />}
+            content={<p>{chat.content}</p>}
+          ></Comment>
+        ))}
       </div>
       <div className="chat-response">
         <Comment
@@ -49,7 +32,6 @@ const ChatComponent = () => {
                 placeholder="Say something nice..."
                 autoSize={{ minRows: 2, maxRows: 4 }}
               />
-
               <Button loading={false} type="primary">
                 Send
               </Button>

@@ -15,10 +15,11 @@ import {
   Skeleton,
   Avatar,
   Tooltip,
+  message,
 } from 'antd';
 import { AppState } from '../store/configureStore';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart } from '../actions/ShoppingCart';
+import { removeFromCart, clearCart } from '../actions/ShoppingCart';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -37,10 +38,24 @@ const validateMessages = {
   },
 };
 
+const inputGridSetup = {
+  xs: 24,
+  sm: 24,
+  md: 12,
+  lg: 8,
+  xl: 8,
+  xxl: 8,
+};
+
 const OrderComponent = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const cart = useSelector((state: AppState) => state.shoppingCart);
+  const onFinish = () => {
+    message.success('Request sent!');
+    form.resetFields();
+    dispatch(clearCart());
+  };
   return (
     <div>
       <Title level={2}>Rental Request Form</Title>
@@ -81,9 +96,14 @@ const OrderComponent = () => {
           </Card>
         </Col>
       </Row>
-      <Form form={form} layout="vertical" validateMessages={validateMessages}>
+      <Form
+        form={form}
+        layout="vertical"
+        validateMessages={validateMessages}
+        onFinish={onFinish}
+      >
         <Row gutter={16}>
-          <Col span={8}>
+          <Col {...inputGridSetup}>
             <Form.Item
               label="First Name"
               name="first_name"
@@ -94,7 +114,7 @@ const OrderComponent = () => {
               <Input placeholder="John" />
             </Form.Item>
           </Col>
-          <Col span={8}>
+          <Col {...inputGridSetup}>
             <Form.Item
               label="Last Name"
               name="last_name"
@@ -105,7 +125,7 @@ const OrderComponent = () => {
               <Input placeholder="Smith" />
             </Form.Item>
           </Col>
-          <Col span={8}>
+          <Col {...inputGridSetup}>
             <Form.Item
               label="Email Address"
               name="email"
@@ -117,7 +137,7 @@ const OrderComponent = () => {
               <Input placeholder="example@email.com" />
             </Form.Item>
           </Col>
-          <Col span={8}>
+          <Col {...inputGridSetup}>
             <Form.Item
               label="Phone number"
               name="phone"
@@ -131,7 +151,7 @@ const OrderComponent = () => {
               <Input placeholder="XXX-XXX-XXXX" />
             </Form.Item>
           </Col>
-          <Col span={8}>
+          <Col {...inputGridSetup}>
             <Form.Item
               label="Location"
               name="location"
@@ -150,7 +170,7 @@ const OrderComponent = () => {
               </Select>
             </Form.Item>
           </Col>
-          <Col span={8}>
+          <Col {...inputGridSetup}>
             <Form.Item
               name="date"
               label="Rental Date"

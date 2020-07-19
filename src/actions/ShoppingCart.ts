@@ -2,6 +2,7 @@ import {
   AddToCartAction,
   RemoveFromCartAction,
   AppActions,
+  ClearCartAction,
 } from '../types/Actions';
 import { Dispatch } from 'react';
 import { RentalItem } from '../types/Rental';
@@ -16,7 +17,11 @@ export const removeFromCart = (id: string): RemoveFromCartAction => ({
   type: 'REMOVE_FROM_CART',
 });
 
-export const startAddToCart = (item: RentalItem, quantity: number) => {
+export const clearCart = (): ClearCartAction => ({
+  type: 'CLEAR_CART',
+});
+
+export const startAddToCart = (item: RentalItem) => {
   return (dispatch: Dispatch<AppActions>) => {
     dispatch(addToCart(item));
   };
