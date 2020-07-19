@@ -53,6 +53,7 @@ i18n
           rental_store: 'Rental Store',
           your_order: 'Your Order',
           signature: 'Crafted by Yong Lin Wang',
+          contact_us_prompt: 'Got a question? Contact us now!',
         },
       },
       fr: {
@@ -100,6 +101,8 @@ i18n
           rental_store: 'Magasin de location',
           your_order: 'Votre commande',
           signature: 'Réalisé par Yong Lin Wang',
+          contact_us_prompt:
+            'Vous avez une question ? Contactez-nous dès maintenant !',
         },
       },
       cn: {
@@ -126,7 +129,7 @@ i18n
           studio_flash: '大闪光灯',
           battery_flash: '相机闪光灯',
           tripod: '三脚架',
-          rental_prompt: `我们会尽快回复你的请求的！`,
+          rental_prompt: `我们的租赁部门工作人员将收到您的请求，他们将通过电话与您联系，确认您的租赁事宜。我们的租赁团队将能够回答有关您所租赁的设备的问题，并推荐兼容的设备选择。`,
           rental_request_form: '租赁请求单',
           shopping_cart: '购物车',
           first_name: '名',

@@ -71,7 +71,7 @@ function App() {
           </Select>
         </Footer>
         <div className="contact-us-container">
-          <Tooltip placement="left" title="Got a question? Contact us now!">
+          <Tooltip placement="left" title={t('contact_us_prompt')}>
             <Link to="/chat">
               <Button
                 type="primary"
