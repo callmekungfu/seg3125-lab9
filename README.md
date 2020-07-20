@@ -2,6 +2,8 @@
 
 _This is a class project_
 
+Demo: https://seg3125-lab9.vercel.app/
+
 Visionary Inc. is a video/photography rental company for professionals and students
 alike. Visionary Inc. offers an incredible selection of exclusive and popular brand names
 for rent, and one of the industry’s most passionate associates.
@@ -23,11 +25,8 @@ npm start
 ```
 
 ## Some videos I made about this project 🙈
-If I were you I would not watch them, but if you want to see me demo this basic functionless app:
-
-- Part 1 (interactive processes): https://youtu.be/9TNHdNACfsQ
-- Part 2 (mobile usability): https://youtu.be/Yr13xq45pyY
+Video Tour: https://www.youtube.com/watch?v=XM6UofChizQ
 
 Pardon as this was freehanded without a script.
 
-Yong Lin July 12th 2020
+Yong Lin July 19th 2020
