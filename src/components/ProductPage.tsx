@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../store/configureStore';
 import { addToCart } from '../actions/ShoppingCart';
 import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 const { Text, Title, Paragraph } = Typography;
 
@@ -78,7 +79,7 @@ const ProductPageComponent = () => {
 };
 
 function getProductInformationFromSlug(slug: string): RentalItem | undefined {
-  return VisionaryCatelog.find((item) => item.slug === slug);
+  return VisionaryCatelog().find((item) => item.slug === slug);
 }
 
 export default ProductPageComponent;

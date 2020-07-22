@@ -27,7 +27,7 @@ const ShopComponent = () => {
   const [search, setSearch] = useState('');
   const { t } = useTranslation();
   const cart = useSelector((state: AppState) => state.shoppingCart);
-  const catelogToShow = VisionaryCatelog.filter((item) =>
+  const catelogToShow = VisionaryCatelog().filter((item) =>
     applyFilter(current, search, item),
   );
   return (
