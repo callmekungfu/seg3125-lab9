@@ -1,0 +1,39 @@
+name: Solution Submission
+description: Submit your OutStem coding challenge solution
+title: "[Submission]: YOUR_NAME's Coding challenge submission"
+assignees:
+  - callmekungfu
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for completing the OutStem Coding Challenge! Please submit your solution using this form. 
+
+        Make sure to deploy your app if you did the front-end challenge. You can do so with Netlify, Zeit, or GitHub pages.
+  - type: input
+    id: contact
+    attributes:
+      label: Your Name
+      placeholder: ex. John Smith
+    validations:
+      required: true
+  - type: input
+    id: source-url
+    attributes:
+      label: Source Code Repository URL
+      description: The repository URL to your project source code.
+      placeholder: https://github.com/YOUR_USERNAME/YOUR_REPO
+    validations:
+      required: true
+  - type: input
+    id: deployed-url
+    attributes:
+      label: Deployed App URL
+      description: The public deployed URL to your project, we would love to see it in action! (Only for front-end challenge)
+      placeholder: https://yourdeployedapp.com
+    validations:
+      required: false
+  - type: textarea
+    id: anything-else
+    attributes:
+      label: Anything else you would like us to know?
