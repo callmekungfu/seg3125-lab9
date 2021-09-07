@@ -1,6 +1,6 @@
 name: Solution Submission
 description: Submit your OutStem coding challenge solution
-title: "[Submission]: YOUR_NAME's Coding challenge submission"
+title: '[Submission]: YOUR_NAME coding challenge submission'
 assignees:
   - callmekungfu
 body:
@@ -33,6 +33,16 @@ body:
       placeholder: https://yourdeployedapp.com
     validations:
       required: false
+  - type: textarea
+    id: run-instructions
+    attributes:
+      label: Run instructions
+      description: Explain how to properly run your app.
+      placeholder: |
+        1. Do this...
+        2. Do that...
+        3. ...
+        4. Profit.
   - type: textarea
     id: anything-else
     attributes:
